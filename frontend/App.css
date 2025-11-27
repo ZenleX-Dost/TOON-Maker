@@ -1,0 +1,322 @@
+/* App.css - Premium Modern Design */
+
+.App {
+  max-width: 900px;
+  margin: 40px auto;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(250,250,255,0.9) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(31, 38, 135, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.18);
+  padding: 40px;
+  transition: all 0.3s ease;
+}
+
+.App:hover {
+  box-shadow: 
+    0 12px 48px rgba(31, 38, 135, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+h1 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+.input-section {
+  margin-bottom: 24px;
+}
+
+.input-label {
+  display: block;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+textarea {
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  padding: 16px;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  resize: vertical;
+  min-height: 120px;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+textarea::placeholder {
+  color: #a0aec0;
+}
+
+.language-selector {
+  display: flex;
+  gap: 16px;
+  margin: 20px 0;
+  padding: 16px;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 12px;
+}
+
+.language-selector label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #4a5568;
+  transition: color 0.2s ease;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.language-selector label:hover {
+  color: #667eea;
+  background: rgba(255, 255, 255, 1);
+}
+
+.language-selector input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #667eea;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+button {
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.convert-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  flex: 1;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.convert-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.convert-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.convert-btn:disabled {
+  background: linear-gradient(135deg, #a0aec0 0%, #cbd5e0 100%);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.convert-btn.loading {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  cursor: wait;
+}
+
+.clear-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: #667eea;
+  border: 2px solid #667eea;
+  padding: 14px 24px;
+}
+
+.clear-btn:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.result-section {
+  margin-top: 32px;
+  animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.result-title {
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 1.1rem;
+}
+
+.copy-btn {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  border: 1px solid #667eea;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
+
+.copy-btn:hover {
+  background: #667eea;
+  color: white;
+}
+
+.copy-btn.copied {
+  background: #48bb78;
+  border-color: #48bb78;
+  color: white;
+}
+
+.result-content {
+  background: #1a202c;
+  color: #e2e8f0;
+  padding: 24px;
+  border-radius: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.result-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.result-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.result-content::-webkit-scrollbar-thumb {
+  background: rgba(102, 126, 234, 0.5);
+  border-radius: 4px;
+}
+
+.result-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 126, 234, 0.7);
+}
+
+.error-message {
+  background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+  color: white;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-top: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(245, 101, 101, 0.3);
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.footer {
+  margin-top: 32px;
+  text-align: center;
+  color: #718096;
+  font-size: 0.85rem;
+}
+
+.footer a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .App {
+    margin: 20px;
+    padding: 24px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .language-selector {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+  
+  .clear-btn {
+    padding: 12px 24px;
+  }
+}
