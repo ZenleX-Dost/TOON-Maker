@@ -4,13 +4,13 @@ Transform simple prompts into comprehensive master prompts and token-efficient T
 
 ## Features
 
-- 🎯 **Smart Prompt Expansion** - Automatically enriches simple prompts with context, structure, and clarity
-- 📝 **TOON Format Conversion** - Converts to token-efficient TOON structure (Task/Objective/Outcome/Narrow)
-- 🌍 **Bilingual Support** - Full support for English and French
-- 🎨 **Premium UI** - Modern design with gradients, glassmorphism, and smooth animations
-- 📋 **Copy to Clipboard** - One-click copying of results
-- ⌨️ **Keyboard Shortcuts** - Press Ctrl+Enter to convert quickly
-- ⚡ **Real-time Processing** - Instant conversion with loading feedback
+- **Smart Prompt Expansion** - Automatically enriches simple prompts with context, structure, and clarity
+- **TOON Format Conversion** - Converts to token-efficient TOON structure (Task/Objective/Outcome/Narrow)
+- **Bilingual Support** - Full support for English and French
+- **Premium UI** - Modern design with gradients, glassmorphism, and smooth animations
+- **Copy to Clipboard** - One-click copying of results
+- **Keyboard Shortcuts** - Press Ctrl+Enter to convert quickly
+- **Real-time Processing** - Instant conversion with loading feedback
 
 ## Tech Stack
 

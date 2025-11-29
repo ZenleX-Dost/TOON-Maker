@@ -2,6 +2,10 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import sys
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from toon_maker import ToonMaker
 
