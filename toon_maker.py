@@ -69,6 +69,8 @@ class ToonMaker:
                 "and expand it into a comprehensive 'Master Prompt'. "
                 "The Master Prompt should include context, specific requirements, stylistic guidelines, "
                 "and any necessary constraints to ensure the best possible output from an AI. "
+                "IMPORTANT: Do not invent specific data values (like '5000 devices' or specific dates) unless the user provided them. "
+                "Use placeholders or general terms if specific details are missing. "
                 f"The output must be in {self.language}."
             )
             
@@ -86,76 +88,89 @@ class ToonMaker:
 
         try:
             toon_guide = """
-            TOON Format Structure:
+            STRICT TOON SYNTAX RULES:
+            1. Length Marker: Arrays must have a length marker, e.g., `users[3]`.
+            2. Field Names: For arrays of objects, define fields once in curly braces, e.g., `users[3]{id,name,email}`.
+            3. Data Rows: Array items must be CSV-like rows matching the field order. No quotes around values unless necessary.
+            4. Nested Objects: Use YAML-like indentation (2 spaces).
+            5. Key-Value: Simple keys are `key: value`.
+
+            EXAMPLE INPUT (JSON):
+            {
+              "users": [
+                {"id": 1, "name": "Sarah", "role": "Admin"},
+                {"id": 2, "name": "Mike", "role": "Editor"}
+              ],
+              "meta": {"ver": "1.0"}
+            }
+
+            EXAMPLE OUTPUT (TOON):
+            users[2]{id,name,role}:
+              1,Sarah,Admin
+              2,Mike,Editor
+            meta:
+              ver: "1.0"
+
+            Template to follow for this task:
             task:
               description: <summary>
               type: <type>
               complexity: <level>
             objective:
               purpose: <goal>
-              success_criteria[N]: <list>
+              success_criteria[N]: <comma_separated_list>
               impact: <impact>
               target_audience:
                 knowledge_level: <level>
                 expectations: <expectations>
             outcome:
-              deliverables[N]:
-                type: <type>
-                format: <format>
-              content_requirements[N]: <list>
+              deliverables[N]{type,format}:
+                <type>,<format>
+              content_requirements[N]: <comma_separated_list>
               quality_standards[N]{criterion,requirement,priority}:
-                <csv_rows>
+                <criterion>,<requirement>,<priority>
             narrow:
               scope:
-                include[N]: <list>
-                exclude[N]: <list>
+                include[N]: <comma_separated_list>
+                exclude[N]: <comma_separated_list>
               constraints:
                 <key>: <value>
-              assumptions[N]: <list>
+              assumptions[N]: <comma_separated_list>
             """
 
             system_instruction = (
                 "You are an expert system architect. Convert the following Master Prompt into the TOON (Token-Oriented Object Notation) format. "
-                "Use the structure provided below. Keep it token-efficient. "
+                "You must STRICTLY follow the provided syntax and template. "
+                "Do NOT output JSON. Do NOT output Markdown code blocks. Output ONLY the raw TOON text. "
                 f"The output must be in {self.language}. "
                 f"Structure guide: {toon_guide}"
             )
 
             response = self.model.generate_content(f"{system_instruction}\n\nMaster Prompt: {master_prompt}")
-            return response.text
+            # Clean up potential markdown code blocks if the model ignores instructions
+            text = response.text.strip()
+            if text.startswith("```toon"):
+                text = text[7:]
+            elif text.startswith("```"):
+                text = text[3:]
+            if text.endswith("```"):
+                text = text[:-3]
+            return text.strip()
         except Exception as e:
             return f"Error generating TOON format: {str(e)}"
 
     def process(self, prompt: str) -> str:
         """
         Main processing pipeline: Normal -> Master -> TOON
+        Returns ONLY the TOON formatted text.
         """
-        t = self.translations[self.language]
-        
-        # Stage 1: Expand to master prompt
+        # Stage 1: Expand to master prompt (Internal only)
         master = self.expand_to_master(prompt)
         
         # Stage 2: Convert to TOON format
         toon = self.master_to_toon(master)
         
-        # Format final output
-        output = f"""## {t['ORIGINAL_PROMPT']}
-{prompt}
-
----
-
-## {t['MASTER_PROMPT']}
-{master}
-
----
-
-## {t['TOON_FORMAT']}
-
-```toon
-{toon}
-```"""
-        
-        return output
+        return toon
 
 if __name__ == "__main__":
     import argparse

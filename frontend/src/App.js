@@ -112,7 +112,7 @@ function App() {
 
       {error && (
         <div className="error-message">
-          ⚠️ {error}
+          {error}
         </div>
       )}
 
@@ -124,7 +124,7 @@ function App() {
               className={`copy-btn ${copied ? 'copied' : ''}`}
               onClick={handleCopy}
             >
-              {copied ? '✓ Copied!' : '📋 Copy'}
+              {copied ? 'Copied!' : 'Copy'}
             </button>
           </div>
           <div className="result-content">{result}</div>
@@ -132,7 +132,7 @@ function App() {
       )}
 
       <div className="footer">
-        Powered by TOON Format • Press <strong>Ctrl+Enter</strong> to convert
+        Developed by Amine EL-HEND • Press <strong>Ctrl+Enter</strong> to convert
       </div>
     </div>
   );
