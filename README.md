@@ -1,182 +1,120 @@
 # TOON-Maker Full Application
 
-Transform simple prompts into comprehensive master prompts and token-efficient TOON format for optimal AI execution.
+Transform simple prompts into comprehensive master prompts and token-efficient TOON format for optimal AI execution, powered by Google's Gemini LLM.
 
 ## Features
 
-- **Smart Prompt Expansion** - Automatically enriches simple prompts with context, structure, and clarity
-- **TOON Format Conversion** - Converts to token-efficient TOON structure (Task/Objective/Outcome/Narrow)
-- **Bilingual Support** - Full support for English and French
-- **Premium UI** - Modern design with gradients, glassmorphism, and smooth animations
-- **Copy to Clipboard** - One-click copying of results
-- **Keyboard Shortcuts** - Press Ctrl+Enter to convert quickly
-- **Real-time Processing** - Instant conversion with loading feedback
+- **AI-Powered Expansion** - Uses Google Gemini (2.5/2.0/Pro) to intelligently expand prompts with context and nuance.
+- **Strict TOON Format** - Generates clean, token-efficient TOON output (Task/Objective/Outcome/Narrow) without hallucinations.
+- **Bilingual Support** - Full support for English and French.
+- **Aggressive Premium UI** - Immersive Black & Red theme with pulsing animations, glassmorphism, and interactive elements.
+- **One-Click Run** - Simple `run.bat` script to launch the full stack.
+- **Real-time Processing** - Instant conversion with visual feedback.
 
 ## Tech Stack
 
 ### Backend
-- Python Flask API with CORS support
-- Comprehensive prompt expansion logic
-- Full TOON format implementation
+- **Python Flask** API
+- **Google Gemini API** (`google-generativeai`) for LLM processing
+- **Python Dotenv** for secure configuration
+- **Strict Prompt Engineering** to enforce format constraints
 
 ### Frontend
-- React 18 with modern hooks
-- Premium CSS design with Inter font
-- Responsive glassmorphism UI
-- Error handling and loading states
+- **React 18**
+- **Aggressive CSS Design** (Black/Red theme, Glitch effects, Glowing elements)
+- **Responsive Layout**
 
-## Installation & Setup
+## Getting Started (User Guide)
+
+Follow these steps to clone and run the project on your local machine.
 
 ### Prerequisites
-- Python 3.7+
-- Node.js 14+
-- npm or yarn
+- **Python 3.8+** installed
+- **Node.js 14+** installed
+- A **Google Gemini API Key** (Get one from [Google AI Studio](https://aistudio.google.com/))
 
-### Backend Setup
-
-1. Navigate to the backend directory:
+### 1. Clone the Repository
 ```bash
-cd backend
+git clone https://github.com/ZenleX-Dost/TOON-Maker.git
+cd TOON-Maker
 ```
 
-2. Install Python dependencies:
+### 2. Configure Backend
+1.  Navigate to the `backend` folder:
+    ```bash
+    cd backend
+    ```
+2.  Create a `.env` file (copy from `.env.example`):
+    ```bash
+    cp .env.example .env
+    ```
+3.  Open `.env` and paste your API key:
+    ```env
+    GEMINI_API_KEY=your_actual_api_key_here
+    ```
+
+### 3. Install Dependencies
+**Backend:**
 ```bash
+cd backend
 pip install -r requirements.txt
 ```
 
-3. Run the Flask server:
+**Frontend:**
 ```bash
-python app.py
-```
-
-Backend will start on `http://localhost:5000`
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-```bash
-cd frontend
-```
-
-2. Install Node dependencies:
-```bash
+cd ../frontend
 npm install
 ```
 
-3. Start the development server:
+### 4. Run the Application
+You can start both the backend and frontend with a single script from the root directory:
+
+**Windows:**
+Double-click `run.bat` or run in terminal:
 ```bash
-npm start
+run.bat
 ```
 
-Frontend will be available at the URL shown (typically `http://localhost:3000`)
+**Manual Start:**
+- Backend: `cd backend && python app.py` (Runs on `http://localhost:5000`)
+- Frontend: `cd frontend && npm start` (Runs on `http://localhost:3000`)
 
 ## Usage
 
-1. **Enter your prompt** - Type any request in the text area
-2. **Select language** - Choose English or French
-3. **Convert** - Click the convert button or press Ctrl+Enter
-4. **View results** - See your original prompt, master prompt, and TOON format
-5. **Copy** - Use the copy button to save results to clipboard
+1.  **Enter your prompt** in the text area.
+2.  **Select language** (English or French).
+3.  **Click "CONVERT TO TOON FORMAT"** or press **Ctrl+Enter**.
+4.  **View results**: The application will generate a strictly formatted TOON output.
+5.  **Copy**: Click the copy button to save the result.
 
-### Example
-
-**Input:** `Write a blog post about climate change`
-
-**Output includes:**
-- Original prompt
-- Expanded master prompt with context and requirements
-- TOON format with structured task, objective, outcome, and narrow sections
-
-## API Endpoints
-
-### POST /convert
-Convert a prompt to TOON format
-
-**Request:**
-```json
-{
-  "prompt": "Your prompt here",
-  "lang": "en"
-}
-```
-
-**Response:**
-```json
-{
-  "result": "Formatted output with original, master, and TOON sections"
-}
-```
-
-### GET /health
-Check server status
-
-**Response:**
-```json
-{
-  "status": "ok"
-}
-```
-
-## About TOON Format
-
-TOON (Token-Oriented Object Notation) is a token-efficient format that achieves ~40% token savings vs JSON while maintaining high accuracy. It combines:
-
-- **YAML-like indentation** for nested objects
-- **CSV-style tabular layout** for uniform arrays
-- **Explicit structural metadata** ([N] lengths, {fields} headers)
-
-The format includes four main sections:
-- **T**ask - What needs to be done
-- **O**bjective - Why it matters
-- **O**utcome - What the result should look like
-- **N**arrow - Boundaries and constraints
-
-## Troubleshooting
-
-### Backend won't start
-- Ensure Flask and flask-cors are installed: `pip install -r requirements.txt`
-- Check if port 5000 is available
-- Try running with: `python -m flask run --port=5000`
-
-### Frontend can't connect to backend
-- Verify backend is running on `http://localhost:5000`
-- Check browser console for CORS errors
-- Ensure flask-cors is properly installed
-
-### Module not found errors
-- Backend: Run from project root or ensure PYTHONPATH is set
-- Frontend: Delete `node_modules` and run `npm install` again
-
-## Development
-
-The application follows a clean architecture:
+## Project Structure
 
 ```
 TOON-Maker/
 ├── backend/
-│   ├── app.py              # Flask API with CORS
+│   ├── app.py              # Flask API
 │   ├── requirements.txt    # Python dependencies
-│   └── __init__.py
+│   ├── .env                # API Key (User created)
+│   └── ...
 ├── frontend/
-│   ├── App.js              # Main React component
-│   ├── App.css             # Premium styling
-│   ├── index.js            # React entry point
-│   ├── index.css           # Global styles
-│   ├── index.html          # HTML template
-│   └── package.json        # Node dependencies
-├── toon_maker.py           # Core conversion logic
-├── prompt.txt              # System specification
-└── README.md
+│   ├── src/
+│   │   ├── App.js          # React Logic
+│   │   ├── App.css         # Aggressive Theme Styles
+│   │   └── ...
+│   ├── public/
+│   │   └── favicon.ico     # Custom Icon
+│   └── ...
+├── toon_maker.py           # Core Gemini Integration Logic
+├── run.bat                 # One-click startup script
+└── README.md               # Documentation
 ```
+
+## Troubleshooting
+
+-   **"TOON format generation requires AI..."**: Ensure your `GEMINI_API_KEY` is set correctly in `backend/.env`.
+-   **Backend won't start**: Check if port 5000 is free.
+-   **Frontend connection error**: Ensure the backend is running before using the frontend.
 
 ## License
 
-MIT License - Feel free to use and modify as needed.
-
-## Contributing
-
-Contributions are welcome! Please ensure:
-- Code follows existing style
-- All features are tested
-- Documentation is updated
-- Both English and French support maintained
+MIT License - Developed by **Amine EL-HEND**.
